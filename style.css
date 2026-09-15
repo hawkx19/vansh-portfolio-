@@ -55,81 +55,207 @@ section {
 }
 
 /* =========================
-   INTRO
+   HAWKX CINEMATIC INTRO
 ========================= */
 
 .intro {
   position: fixed;
   inset: 0;
-  z-index: 5000;
-  background: #000;
+  z-index: 99999;
+  overflow: hidden;
+  background: #030303;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  animation: introOut 1s ease 2.2s forwards;
+  opacity: 1;
+  visibility: visible;
   pointer-events: none;
+  animation: introOut 1.2s ease 5s forwards;
 }
 
-.intro-logo {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  letter-spacing: 0.35em;
-}
+/* GOLDEN CINEMATIC LIGHT */
 
-.intro-logo span {
-  display: block;
-  color: #eee9df;
-  font-size: clamp(22px, 3vw, 42px);
-  font-weight: 500;
-}
-
-.intro-logo small {
-  display: block;
-  margin-top: 12px;
-  color: var(--gold);
-  font-size: 10px;
-  letter-spacing: 0.5em;
-}
-
-.intro-light {
+.intro-glow {
   position: absolute;
-  width: 45vw;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(201,173,120,0.12),
-    transparent
+  width: 75vw;
+  height: 75vw;
+  left: -30vw;
+  top: -20vw;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(210,170,95,0.28) 0%,
+    rgba(210,170,95,0.09) 28%,
+    transparent 68%
   );
-  transform: translateX(-120%);
-  animation: lightSweep 1.3s ease 0.3s forwards;
+  filter: blur(35px);
+  animation: glowMove 5s ease-in-out forwards;
 }
+
+@keyframes glowMove {
+  0% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  75% {
+    transform: translateX(75%);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateX(105%);
+    opacity: 0;
+  }
+}
+
+
+/* HAWK */
+
+.intro-hawk {
+  position: absolute;
+  z-index: 2;
+  width: min(720px, 75vw);
+  right: -60%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+
+  animation:
+    hawkFlight 4.5s cubic-bezier(.2,.7,.2,1) forwards;
+}
+
+.intro-hawk img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+
+  filter:
+    drop-shadow(0 0 25px rgba(210,170,95,0.25))
+    drop-shadow(0 0 70px rgba(210,170,95,0.12));
+}
+
+@keyframes hawkFlight {
+
+  0% {
+    right: -65%;
+    transform: translateY(-50%) scale(0.72);
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  52% {
+    right: 8%;
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+  }
+
+  78% {
+    right: 28%;
+    transform: translateY(-50%) scale(1);
+    opacity: 0.9;
+  }
+
+  100% {
+    right: 115%;
+    transform: translateY(-50%) scale(1.06);
+    opacity: 0;
+  }
+}
+
+
+/* HAWKX TEXT */
+
+.intro-content {
+  position: relative;
+  z-index: 4;
+  text-align: center;
+
+  animation: introText 5s ease forwards;
+}
+
+.intro-mark {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(80px, 15vw, 220px);
+  line-height: 0.82;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+
+  color: #f1e7d4;
+
+  text-shadow:
+    0 0 25px rgba(210,170,95,0.18),
+    0 0 80px rgba(210,170,95,0.08);
+}
+
+.intro-year {
+  margin-top: 28px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.65em;
+
+  color: rgba(241,231,212,0.7);
+}
+
+@keyframes introText {
+
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  18% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  76% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+
+/* CURTAINS */
 
 .intro-curtain {
   position: absolute;
   top: 0;
   width: 50%;
   height: 100%;
+
   background: #030303;
-  z-index: 2;
+  z-index: 5;
+
+  animation-duration: 1.2s;
+  animation-delay: 4.9s;
+  animation-timing-function: cubic-bezier(.77,0,.18,1);
+  animation-fill-mode: forwards;
 }
 
-.intro-curtain.left {
+.intro-curtain-left {
   left: 0;
-  animation: curtainLeft 1s cubic-bezier(.77,0,.18,1) 1.55s forwards;
+  animation-name: curtainLeft;
 }
 
-.intro-curtain.right {
+.intro-curtain-right {
   right: 0;
-  animation: curtainRight 1s cubic-bezier(.77,0,.18,1) 1.55s forwards;
-}
-
-@keyframes lightSweep {
-  to {
-    transform: translateX(120%);
-  }
+  animation-name: curtainRight;
 }
 
 @keyframes curtainLeft {
@@ -144,13 +270,35 @@ section {
   }
 }
 
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+  .intro-hawk {
+    width: 105vw;
+    right: -85%;
+  }
+
+  .intro-mark {
+    font-size: 22vw;
+  }
+
+  .intro-year {
+    font-size: 9px;
+    letter-spacing: 0.45em;
+  }
+}
+
+
+/* EXIT */
+
 @keyframes introOut {
   to {
     opacity: 0;
     visibility: hidden;
   }
 }
-
 /* =========================
    NAV
 ========================= */
