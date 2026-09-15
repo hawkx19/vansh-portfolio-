@@ -150,21 +150,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const intro = document.getElementById("intro");
 
-  if (intro) {
+if (intro) {
 
-    // Let the hawk finish its flight first.
-    setTimeout(() => {
-      intro.classList.add("opening");
-    }, 2750);
+  setTimeout(() => {
+    intro.classList.add("hide");
+  }, 5000);
 
-
-    // Remove intro after curtains open.
-    setTimeout(() => {
-      intro.classList.add("hide");
-    }, 5500);
-
-  }
-
+}
 
   /* -------------------------------------------------------
      REMOVE WHITE BACKGROUND FROM HERO PHOTO
