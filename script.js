@@ -1,122 +1,140 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const nav = document.querySelector(".nav");
+
   const heroPhoto = document.querySelector(".hero-photo");
-  const revealElements = document.querySelectorAll(".reveal");
+  const nav = document.querySelector(".nav");
 
-  // Navbar scroll effect
-  function updateNav() {
-    if (!nav) return;
+  /* =========================
+     NAVBAR
+  ========================= */
 
-    if (window.scrollY > 40) {
-      nav.classList.add("scrolled");
-    } else {
-      nav.classList.remove("scrolled");
-    }
+  if (nav) {
+    const updateNav = () => {
+      nav.classList.toggle("scrolled", window.scrollY > 40);
+    };
+
+    window.addEventListener("scroll", updateNav, {
+      passive: true
+    });
+
+    updateNav();
   }
 
-  window.addEventListener("scroll", updateNav);
-  updateNav();
 
-  // Scroll-based cinematic photo rotation
-  function updatePhoto() {
-    if (!heroPhoto) return;
+  /* =========================
+     HERO 3D PHOTO
+  ========================= */
 
-    const scrollY = window.scrollY;
-    const rotation = Math.max(-18, Math.min(18, scrollY * 0.035));
-    const movement = Math.min(45, scrollY * 0.04);
+  if (heroPhoto) {
 
-    heroPhoto.style.transform =
-      `translateY(${movement}px) rotateY(${rotation}deg)`;
-  }
+    let ticking = false;
 
-  window.addEventListener("scroll", updatePhoto);
-  updatePhoto();
+    const updatePhoto = () => {
 
-  // Reveal animations
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    },
-    {
-      threshold: 0.12
-    }
-  );
+      const scroll = window.scrollY;
+      const heroHeight = window.innerHeight;
 
-  revealElements.forEach((element) => observer.observe(element));
+      const progress = Math.min(
+        Math.max(scroll / heroHeight, 0),
+        1
+      );
 
-  // Hidden photo trigger → full body modal
-  const trigger = document.querySelector(".photo-trigger");
-  const modal = document.querySelector(".fullbody-modal");
-  const closeButton = document.querySelector(".modal-close");
+      /*
+        Smooth continuous rotation:
+        front → angled → opposite angle
+      */
 
-  function openModal() {
-    if (modal) {
-      modal.classList.add("active");
-      document.body.style.overflow = "hidden";
-    }
-  }
+      const rotation = progress * 38 - 5;
+      const depth = progress * 45;
+      const vertical = progress * 18;
 
-  function closeModal() {
-    if (modal) {
-      modal.classList.remove("active");
-      document.body.style.overflow = "";
-    }
-  }
+      heroPhoto.style.transform = `
+        perspective(1100px)
+        rotateY(${rotation}deg)
+        translateZ(${depth}px)
+        translateY(${vertical}px)
+      `;
 
-  if (trigger) {
-    trigger.addEventListener("click", openModal);
-  }
+      ticking = false;
+    };
 
-  if (closeButton) {
-    closeButton.addEventListener("click", closeModal);
-  }
 
-  if (modal) {
-    modal.addEventListener("click", (event) => {
-      if (event.target === modal) {
-        closeModal();
+    window.addEventListener("scroll", () => {
+
+      if (!ticking) {
+        window.requestAnimationFrame(updatePhoto);
+        ticking = true;
       }
+
+    }, {
+      passive: true
+    });
+
+    updatePhoto();
+  }
+
+
+  /* =========================
+     REVEAL ANIMATIONS
+  ========================= */
+
+  const revealItems =
+    document.querySelectorAll(".reveal");
+
+  if (revealItems.length) {
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+    revealItems.forEach(item => {
+      observer.observe(item);
     });
   }
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closeModal();
-    }
-  });
 
-  // Smooth scrolling for internal links
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const targetId = link.getAttribute("href");
+  /* =========================
+     INTERNAL SCROLL LINKS
+  ========================= */
 
-      if (!targetId || targetId === "#") return;
+  document
+    .querySelectorAll('a[href^="#"]')
+    .forEach(link => {
 
-      const target = document.querySelector(targetId);
+      link.addEventListener("click", event => {
 
-      if (target) {
+        const id =
+          link.getAttribute("href");
+
+        if (!id || id === "#") return;
+
+        const target =
+          document.querySelector(id);
+
+        if (!target) return;
+
         event.preventDefault();
 
         target.scrollIntoView({
           behavior: "smooth",
           block: "start"
         });
-      }
-    });
-  });
 
-  // Small mouse-depth effect on desktop
-  if (window.innerWidth > 900 && heroPhoto) {
-    document.addEventListener("mousemove", (event) => {
-      const x = (event.clientX / window.innerWidth - 0.5) * 2;
-      const y = (event.clientY / window.innerHeight - 0.5) * 2;
+      });
 
-      heroPhoto.style.setProperty("--mouse-x", `${x}`);
-      heroPhoto.style.setProperty("--mouse-y", `${y}`);
     });
-  }
+
 });
