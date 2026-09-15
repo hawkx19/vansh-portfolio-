@@ -155,13 +155,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Let the hawk finish its flight first.
     setTimeout(() => {
       intro.classList.add("opening");
-    }, 1750);
+    }, 2250);
 
 
     // Remove intro after curtains open.
     setTimeout(() => {
       intro.classList.add("hide");
-    }, 2750);
+    }, 4750);
 
   }
 
