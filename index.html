@@ -16,18 +16,30 @@
 
 <body>
 
-  <!-<!-- ================= INTRO ================= -->
+<!-- ================= INTRO ================= -->
 
-<div class="intro" id="intro">
+<div id="intro" class="intro">
 
-  <div class="intro-hawk">
-    <img src="hawk.png" alt="HAWKX">
+  <div class="intro-glow"></div>
+
+  <div class="intro-hawk" id="introHawk">
+    <svg viewBox="0 0 240 120" aria-hidden="true">
+      <path d="M8 70
+        C42 38 68 35 98 51
+        C120 23 151 13 188 17
+        C166 28 150 43 140 58
+        C169 46 204 49 232 65
+        C198 62 174 69 151 82
+        C123 98 92 101 64 88
+        C43 79 25 73 8 70Z"/>
+      <path d="M100 52
+        C121 42 142 42 158 49
+        C143 57 128 64 112 68Z"/>
+    </svg>
   </div>
 
-  <div class="intro-gold-light"></div>
-
-  <div class="intro-center">
-    <div class="intro-brand">HAWKX</div>
+  <div class="intro-content">
+    <div class="intro-mark">HAWKX</div>
     <div class="intro-year">PORTFOLIO · 2026</div>
   </div>
 
@@ -39,18 +51,26 @@
 
 <!-- ================= HERO ================= -->
 
-<section class="hero" id="home">
+<section class="hero" id="hero">
+
+  <div class="hero-light hero-light-one"></div>
+  <div class="hero-light hero-light-two"></div>
 
   <div class="hero-top">
-    <div class="hero-brand">HAWKX</div>
 
-    <div class="hero-status">
-      PERSONAL PORTFOLIO
-      <span>2026</span>
+    <div class="hero-brand">
+      HAWKX
     </div>
+
+    <div class="hero-meta">
+      <span>PERSONAL PORTFOLIO</span>
+      <small>2026</small>
+    </div>
+
   </div>
 
-  <div class="hero-content">
+
+  <div class="hero-main">
 
     <div class="hero-copy">
 
@@ -60,36 +80,28 @@
 
       <h1>
         Hi, I Am
-        <span>Vansh Arora!</span>
+        <em>Vansh Arora!</em>
       </h1>
 
-      <p class="hero-subtitle">
+      <p>
         Not just learning things — trying to build something with them.
       </p>
 
     </div>
 
 
-    <div class="hero-visual">
+    <div class="hero-photo-area" id="heroPhotoArea">
 
-      <div class="hero-light"></div>
+      <div class="photo-glow"></div>
 
-      <div class="hero-photo-wrap">
-        <img
-          src="vansh-formal.png"
-          class="hero-photo"
-          alt="Vansh Arora"
-        >
-      </div>
+      <img
+        id="heroPhoto"
+        src="vansh-formal.png"
+        alt="Vansh Arora"
+      >
 
     </div>
 
-  </div>
-
-  <div class="hero-bottom">
-    <span>01</span>
-    <span class="scroll-line"></span>
-    <span>SCROLL TO DISCOVER</span>
   </div>
 
 </section>
