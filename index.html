@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vansh Arora — Portfolio" />
+
+  <title>Vansh Arora — Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- CINEMATIC INTRO -->
+  <div class="intro" id="intro">
+    <div class="intro-logo">
+      <span class="hawk-mark">⌁</span>
+      <span>HAWKX</span>
+    </div>
+
+    <div class="intro-line"></div>
+
+    <p>PORTFOLIO · 2026</p>
+
+    <div class="curtain curtain-left"></div>
+    <div class="curtain curtain-right"></div>
+  </div>
+
+
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <a href="#hero" class="brand">
+      <span class="brand-icon">⌁</span>
+      <span>HAWKX</span>
+    </a>
+
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <span class="year">2026</span>
+  </header>
+
+
+  <main>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero section" id="hero">
+
+      <div class="hero-light"></div>
+
+      <div class="hero-copy reveal">
+
+        <p class="eyebrow">HELLO, I'M VANSH</p>
+
+        <h1>
+          Hi, I Am
+          <span>Vansh Arora!</span>
+        </h1>
+
+        <p class="hero-description">
+          Not just learning things — trying to build something with them.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#about" class="luxury-button">
+            <span>ABOUT ME</span>
+            <span>↗</span>
+          </a>
+
+          <a href="#about" class="scroll-link">
+            EXPLORE <span>↓</span>
+          </a>
+        </div>
+
+      </div>
+
+
+      <!-- HERO PHOTO -->
+      <div class="hero-photo-wrap reveal">
+
+        <div class="photo-glow"></div>
+
+        <div class="photo-frame" id="photoFrame">
+          <!-- Replace this filename with your uploaded portrait filename -->
+          <img
+            src="vansh-formal.png"
+            alt="Vansh Arora"
+            class="hero-photo"
+            id="heroPhoto"
+          />
+        </div>
+
+        <!-- Almost invisible interactive area -->
+        <button
+          class="hidden-photo-trigger"
+          id="fullBodyTrigger"
+          aria-label="Reveal full portrait">
+        </button>
+
+      </div>
+
+
+      <div class="hero-meta">
+        <span>01</span>
+        <span>SCROLL TO EXPLORE</span>
+      </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+    <section class="about section" id="about">
+
+      <div class="section-number reveal">02 / ABOUT</div>
+
+      <div class="about-heading reveal">
+        <p class="eyebrow">A LITTLE ABOUT ME</p>
+
+        <h2>
+          Still figuring things out,
+          <em>one idea at a time.</em>
+        </h2>
+      </div>
+
+
+      <div class="about-grid">
+
+        <div class="about-text reveal">
+
+          <p class="large-text">
+            I'm currently a Class XII student with PCM, exploring
+            digital projects, creative ideas and the process of
+            turning concepts into something real.
+          </p>
+
+          <p>
+            I enjoy building things, experimenting with new tools,
+            staying active through running and athletics, and
+            learning by actually trying things instead of just
+            reading about them.
+          </p>
+
+          <div class="funny-note">
+            <span>— A small confession</span>
+            <strong>
+              “Plan toh hai… bas thoda aur sochna baaki hai.”
+            </strong>
+          </div>
+
+        </div>
+
+
+        <!-- EDUCATION -->
+        <div class="education-card reveal">
+
+          <div class="card-label">CURRENTLY</div>
+
+          <div class="education-main">
+            <span>CLASS XII</span>
+            <strong>PCM</strong>
+          </div>
+
+          <div class="education-divider"></div>
+
+          <div class="education-item">
+            <span>CBSE CLASS X</span>
+            <strong>90.2%</strong>
+          </div>
+
+          <p>
+            A result worth mentioning,
+            not a reason to make the whole website about it. :)
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- PCM VISUAL STRIP -->
+      <div class="subject-strip reveal">
+
+        <div class="subject physics">
+          <div class="subject-symbol">F = ma</div>
+          <span>PHYSICS</span>
+          <small>Curiosity in motion.</small>
+        </div>
+
+        <div class="subject chemistry">
+          <div class="subject-symbol">H₂O</div>
+          <span>CHEMISTRY</span>
+          <small>Things reacting. Literally.</small>
+        </div>
+
+        <div class="subject maths">
+          <div class="subject-symbol">∫ π Σ</div>
+          <span>MATHEMATICS</span>
+          <small>Some things just need solving.</small>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= SKILLS ================= -->
+    <section class="skills section" id="skills">
+
+      <div class="section-number reveal">03 / SKILLS</div>
+
+      <div class="skills-intro reveal">
+
+        <p class="eyebrow">WHAT I LIKE DOING</p>
+
+        <h2>
+          A mix of things
+          <em>that make sense to me.</em>
+        </h2>
+
+      </div>
+
+
+      <div class="skills-grid">
+
+        <!-- BUILD -->
+        <article class="skill-card skill-large reveal">
+
+          <div class="skill-top">
+            <span>01</span>
+            <span>BUILD</span>
+          </div>
+
+          <div class="skill-content">
+            <h3>Digital<br><em>Builder.</em></h3>
+
+            <p>
+              Websites, digital projects, creative experiments
+              and anything that starts with “what if we tried this?”
+            </p>
+          </div>
+
+          <div class="skill-tags">
+            <span>WEBSITES</span>
+            <span>PROJECTS</span>
+            <span>AI TOOLS</span>
+          </div>
+
+        </article>
+
+
+        <!-- CREATIVE -->
+        <article class="skill-card reveal">
+
+          <div class="skill-top">
+            <span>02</span>
+            <span>CREATE</span>
+          </div>
+
+          <div class="skill-content">
+            <h3>Ideas<br><em>First.</em></h3>
+
+            <p>
+              I like experimenting with concepts and seeing
+              where an idea can actually go.
+            </p>
+          </div>
+
+          <div class="corner-symbol">✦</div>
+
+        </article>
+
+
+        <!-- ACTIVE -->
+        <article class="skill-card reveal">
+
+          <div class="skill-top">
+            <span>03</span>
+            <span>ACTIVE</span>
+          </div>
+
+          <div class="skill-content">
+            <h3>Run.<br><em>Repeat.</em></h3>
+
+            <p>
+              Running and athletics keep things moving —
+              literally and otherwise.
+            </p>
+          </div>
+
+          <div class="running-line"></div>
+
+        </article>
+
+
+        <!-- PERSONALITY -->
+        <article class="skill-card skill-wide reveal">
+
+          <div class="skill-top">
+            <span>04</span>
+            <span>PERSONALITY</span>
+          </div>
+
+          <div class="personality-content">
+
+            <div>
+              <span class="mini-label">01 /</span>
+              <h3>Good bond?</h3>
+              <p>Funny mode tends to appear eventually.</p>
+            </div>
+
+            <div>
+              <span class="mini-label">02 /</span>
+              <h3>Curious?</h3>
+              <p>If something catches my attention, I'll probably try it.</p>
+            </div>
+
+          </div>
+
+          <div class="funny-corner">
+            “Pehle try karte hain, baad mein dekh lenge.”
+          </div>
+
+        </article>
+
+      </div>
+
+
+      <!-- FLOATING PERSONALITY LINE -->
+      <div class="floating-note reveal">
+        <span>04</span>
+        <p>
+          “Jo samajh aa gaya, woh bana diya.
+          Jo nahi aaya… uspe kaam chal raha hai.”
+        </p>
+      </div>
+
+    </section>
+
+
+    <!-- TEMP WORK PLACEHOLDER -->
+    <section class="future-section" id="work">
+      <span>04 / WORK</span>
+      <p>Selected work coming next.</p>
+    </section>
+
+
+    <!-- TEMP CONTACT PLACEHOLDER -->
+    <section class="future-section" id="contact">
+      <span>05 / CONTACT</span>
+      <p>Let's build something worth remembering.</p>
+    </section>
+
+  </main>
+
+
+  <!-- FULL BODY MODAL -->
+  <div class="full-body-modal" id="fullBodyModal">
+
+    <button class="modal-close" id="modalClose" aria-label="Close">
+      ×
+    </button>
+
+    <div class="modal-content">
+      <img
+        src="vansh-fullbody.png"
+        alt="Vansh Arora full portrait"
+      />
+
+      <span>THE OTHER ANGLE</span>
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+</body>
+  </html>
