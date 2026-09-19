@@ -1,353 +1,275 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const heroPhoto = document.querySelector(".hero-photo");
+  /* =========================
+     ELEMENTS
+  ========================= */
+
+  const intro = document.querySelector(".intro");
   const nav = document.querySelector(".nav");
+  const menuBtn = document.querySelector(".menu-btn");
+  const navLinks = document.querySelector(".nav-links");
+  const heroPhoto = document.querySelector("#heroPhoto");
+  const reveals = document.querySelectorAll(".reveal");
+
+
+  /* =========================
+     INTRO
+  ========================= */
+
+  if (intro) {
+    setTimeout(() => {
+      intro.classList.add("hide");
+    }, 4000);
+  }
+
 
   /* =========================
      NAVBAR
   ========================= */
 
-  if (nav) {
-    const updateNav = () => {
-      nav.classList.toggle("scrolled", window.scrollY > 40);
-    };
+  const updateNav = () => {
+    if (!nav) return;
 
-    window.addEventListener("scroll", updateNav, {
-      passive: true
+    nav.classList.toggle("scrolled", window.scrollY > 40);
+  };
+
+  updateNav();
+
+  window.addEventListener("scroll", updateNav, {
+    passive: true
+  });
+
+
+  /* =========================
+     MOBILE MENU
+  ========================= */
+
+  if (menuBtn && navLinks) {
+
+    menuBtn.addEventListener("click", () => {
+
+      const isOpen = navLinks.classList.toggle("open");
+
+      menuBtn.classList.toggle("active", isOpen);
+
+      menuBtn.setAttribute(
+        "aria-expanded",
+        isOpen ? "true" : "false"
+      );
+
     });
 
-    updateNav();
+
+    const links = navLinks.querySelectorAll("a");
+
+    links.forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        navLinks.classList.remove("open");
+
+        menuBtn.classList.remove("active");
+
+        menuBtn.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      });
+
+    });
+
+  }
+    /* =========================
+     SCROLL REVEAL
+  ========================= */
+
+  if (reveals.length) {
+
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.classList.add("visible");
+
+            observer.unobserve(entry.target);
+
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+
+    reveals.forEach(element => {
+      revealObserver.observe(element);
+    });
+
   }
 
 
   /* =========================
-     HERO 3D PHOTO
+     HERO PHOTO PARALLAX
   ========================= */
 
   if (heroPhoto) {
 
-    let ticking = false;
+    const updateHeroPhoto = () => {
 
-    const updatePhoto = () => {
+      const scrollY = window.scrollY;
 
-      const scroll = window.scrollY;
-      const heroHeight = window.innerHeight;
-
-      const progress = Math.min(
-        Math.max(scroll / heroHeight, 0),
-        1
-      );
-
-      /*
-        Smooth continuous rotation:
-        front → angled → opposite angle
-      */
-
-      const rotation = progress * 38 - 5;
-      const depth = progress * 45;
-      const vertical = progress * 18;
-
-      heroPhoto.style.transform = `
-        perspective(1100px)
-        rotateY(${rotation}deg)
-        translateZ(${depth}px)
-        translateY(${vertical}px)
-      `;
-
-      ticking = false;
-    };
-
-
-    window.addEventListener("scroll", () => {
-
-      if (!ticking) {
-        window.requestAnimationFrame(updatePhoto);
-        ticking = true;
+      if (scrollY > window.innerHeight * 1.2) {
+        return;
       }
 
-    }, {
-      passive: true
-    });
-
-    updatePhoto();
-  }
-
-
-  /* =========================
-     REVEAL ANIMATIONS
-  ========================= */
-
-  const revealItems =
-    document.querySelectorAll(".reveal");
-
-  if (revealItems.length) {
-
-    const observer =
-      new IntersectionObserver(
-        entries => {
-
-          entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-            }
-
-          });
-
-        },
-        {
-          threshold: 0.12
-        }
+      const rotation = Math.min(
+        18,
+        Math.max(-5, -5 + scrollY * 0.035)
       );
 
-    revealItems.forEach(item => {
-      observer.observe(item);
-    });
-  }
-
-
-  /* =========================
-     INTERNAL SCROLL LINKS
-  ========================= */
-
-  document
-    .querySelectorAll('a[href^="#"]')
-    .forEach(link => {
-
-      link.addEventListener("click", event => {
-
-        const id =
-          link.getAttribute("href");
-
-        if (!id || id === "#") return;
-
-        const target =
-          document.querySelector(id);
-
-        if (!target) return;
-
-        event.preventDefault();
-
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-      });
-
-    });
-
-});
-/* =========================================================
-   PORTFOLIO — INTRO + 3D HERO PHOTO
-   ========================================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  /* -------------------------------------------------------
-     INTRO
-     ------------------------------------------------------- */
-
-  const intro = document.getElementById("intro");
-
-if (intro) {
-
-  setTimeout(() => {
-    intro.classList.add("hide");
-  }, 5000);
-
-}
-
-  /* -------------------------------------------------------
-     REMOVE WHITE BACKGROUND FROM HERO PHOTO
-     ------------------------------------------------------- */
-
-  const photo = document.getElementById("heroPhoto");
-
-  if (photo) {
-
-    const removeWhiteBackground = () => {
-
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d", {
-        willReadFrequently: true
-      });
-
-      canvas.width = photo.naturalWidth;
-      canvas.height = photo.naturalHeight;
-
-      ctx.drawImage(
-        photo,
-        0,
-        0,
-        canvas.width,
-        canvas.height
+      const moveY = Math.min(
+        35,
+        scrollY * 0.08
       );
 
-      const imageData = ctx.getImageData(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
-
-      const pixels = imageData.data;
-
-      for (let i = 0; i < pixels.length; i += 4) {
-
-        const r = pixels[i];
-        const g = pixels[i + 1];
-        const b = pixels[i + 2];
-
-        /*
-         * Detect bright/white background.
-         * Keep skin, black suit and dark hair.
-         */
-
-        const brightness = (r + g + b) / 3;
-
-        if (
-          brightness > 235 &&
-          r > 225 &&
-          g > 225 &&
-          b > 225
-        ) {
-          pixels[i + 3] = 0;
-        }
-
-        /*
-         * Softer transition around white edges.
-         */
-
-        else if (
-          brightness > 215 &&
-          r > 205 &&
-          g > 205 &&
-          b > 205
-        ) {
-
-          const fade =
-            1 - ((brightness - 215) / 20);
-
-          pixels[i + 3] =
-            Math.max(
-              0,
-              Math.min(255, fade * 255)
-            );
-        }
-
-      }
-
-      ctx.putImageData(imageData, 0, 0);
-
-      photo.src = canvas.toDataURL("image/png");
+      heroPhoto.style.transform =
+        `perspective(1100px)
+         translateY(${moveY}px)
+         rotateY(${rotation}deg)`;
 
     };
 
 
-    if (photo.complete) {
-      removeWhiteBackground();
-    } else {
-      photo.addEventListener(
-        "load",
-        removeWhiteBackground,
-        { once: true }
-      );
-    }
+    updateHeroPhoto();
+
+    window.addEventListener(
+      "scroll",
+      updateHeroPhoto,
+      { passive: true }
+    );
 
   }
 
 
-  /* -------------------------------------------------------
-     3D SCROLL ROTATION
-     ------------------------------------------------------- */
+  /* =========================
+     SMOOTH ANCHOR SCROLL
+  ========================= */
 
-  const photoArea =
-    document.getElementById("heroPhotoArea");
+  const anchorLinks = document.querySelectorAll(
+    'a[href^="#"]'
+  );
 
-  if (!photoArea || !photo) return;
+  anchorLinks.forEach(link => {
 
+    link.addEventListener("click", event => {
 
-  let ticking = false;
+      const targetId = link.getAttribute("href");
 
+      if (!targetId || targetId === "#") return;
 
-  function updatePhotoRotation() {
+      const target = document.querySelector(targetId);
 
-    const rect =
-      photoArea.getBoundingClientRect();
+      if (!target) return;
 
-    const viewportHeight =
-      window.innerHeight;
+      event.preventDefault();
 
-    /*
-     * progress:
-     * 0 = hero starts
-     * 1 = hero leaves screen
-     */
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
 
-    let progress =
-      (viewportHeight - rect.top) /
-      (viewportHeight + rect.height);
+    });
 
-    progress =
-      Math.max(0, Math.min(1, progress));
+  });
+    /* =========================
+     ACTIVE NAV LINK
+  ========================= */
 
+  const sections = document.querySelectorAll("section[id]");
+  const navItems = document.querySelectorAll(".nav-links a");
 
-    /*
-     * Strong 3D rotation:
-     *
-     * start      = front
-     * middle     = slight side
-     * later      = opposite side
-     */
+  const updateActiveLink = () => {
 
-    const rotateY =
-      -32 + (progress * 78);
+    let currentSection = "";
 
-    const rotateX =
-      Math.sin(progress * Math.PI) * -4;
+    sections.forEach(section => {
 
-    const translateY =
-      progress * -80;
+      const sectionTop = section.offsetTop - 180;
+      const sectionHeight = section.offsetHeight;
 
-    const scale =
-      1.03 - progress * .08;
+      if (
+        window.scrollY >= sectionTop &&
+        window.scrollY < sectionTop + sectionHeight
+      ) {
+        currentSection = section.getAttribute("id");
+      }
 
-
-    photo.style.transform =
-      `
-      perspective(1100px)
-      rotateY(${rotateY}deg)
-      rotateX(${rotateX}deg)
-      translate3d(0, ${translateY}px, 0)
-      scale(${scale})
-      `;
+    });
 
 
-    ticking = false;
+    navItems.forEach(link => {
 
-  }
+      link.classList.remove("active");
 
+      const href = link.getAttribute("href");
+
+      if (href === `#${currentSection}`) {
+        link.classList.add("active");
+      }
+
+    });
+
+  };
+
+
+  updateActiveLink();
 
   window.addEventListener(
     "scroll",
-    () => {
-
-      if (!ticking) {
-
-        requestAnimationFrame(
-          updatePhotoRotation
-        );
-
-        ticking = true;
-
-      }
-
-    },
+    updateActiveLink,
     { passive: true }
   );
 
 
-  updatePhotoRotation();
+  /* =========================
+     PAGE LOAD
+  ========================= */
+
+  window.addEventListener("load", () => {
+
+    document.body.classList.add("loaded");
+
+    if (heroPhoto) {
+      heroPhoto.classList.add("ready");
+    }
+
+  });
+
+
+  /* =========================
+     PREVENT BROKEN IMAGE LOOK
+  ========================= */
+
+  if (heroPhoto) {
+
+    heroPhoto.addEventListener("error", () => {
+
+      heroPhoto.style.opacity = "0";
+
+    });
+
+  }
+
+
+  /* =========================
+     FINISHED
+  ========================= */
 
 });
