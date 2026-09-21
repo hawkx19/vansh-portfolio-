@@ -1390,3 +1390,23 @@ body {
     bottom: 4%;
   }
 }
+/* =========================
+   FINAL HERO PHOTO POSITION
+========================= */
+
+@media (max-width: 699px) {
+
+  .hero-person {
+    width: 145%;
+    max-width: none;
+
+    right: -25%;
+    bottom: -4%;
+
+    z-index: 2;
+  }
+
+  .hero-copy {
+    z-index: 3;
+  }
+}
