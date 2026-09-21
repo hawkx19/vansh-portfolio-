@@ -504,3 +504,889 @@
   }
 
 }
+/* =====================================================
+   HERO — CINEMATIC MOBILE DESIGN
+===================================================== */
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  height: 100svh;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 75% 45%,
+      rgba(116, 82, 36, 0.18),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #080807 0%,
+      #0c0b09 55%,
+      #050504 100%
+    );
+
+  color: #f3eadb;
+}
+
+
+/* subtle cinematic grain */
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.045;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+
+  z-index: 20;
+}
+
+
+/* =====================================================
+   TOP
+===================================================== */
+
+.hero-top {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  padding:
+    28px
+    28px
+    0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  z-index: 15;
+}
+
+
+.hero-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: #e8c987;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: 25px;
+  font-weight: 600;
+
+  letter-spacing: -0.5px;
+}
+
+
+.hero-hawk {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 30px;
+
+  transform: rotate(-25deg);
+
+  color: #e8c987;
+}
+
+
+/* hamburger */
+
+.hero-menu {
+  width: 42px;
+  height: 42px;
+
+  border: 0;
+  background: transparent;
+
+  padding: 8px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+
+  cursor: pointer;
+}
+
+
+.hero-menu span {
+  display: block;
+
+  width: 100%;
+  height: 1.5px;
+
+  background: #e6c47e;
+}
+
+
+/* =====================================================
+   PERSON
+===================================================== */
+
+.hero-visual {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 3;
+}
+
+
+/* warm light behind person */
+
+.hero-glow {
+  position: absolute;
+
+  width: 55%;
+  height: 55%;
+
+  right: -12%;
+  top: 22%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(184, 132, 62, 0.25),
+      transparent 68%
+    );
+
+  filter: blur(35px);
+}
+
+
+/* actual photo */
+
+.hero-person {
+  position: absolute;
+
+  width: 105%;
+
+  max-width: none;
+
+  right: -21%;
+  bottom: -1%;
+
+  object-fit: contain;
+  object-position: center bottom;
+
+  /*
+     IMPORTANT:
+     No rotateY / 3D rotation.
+  */
+
+  filter:
+    contrast(1.04)
+    brightness(0.88);
+
+  /*
+     Fade the lower portion into background.
+  */
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      #000 70%,
+      rgba(0,0,0,.85) 84%,
+      transparent 100%
+    );
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      #000 70%,
+      rgba(0,0,0,.85) 84%,
+      transparent 100%
+    );
+}
+
+
+/* =====================================================
+   TEXT
+===================================================== */
+
+.hero-copy {
+  position: absolute;
+
+  left: 7.5%;
+  bottom: 23%;
+
+  z-index: 10;
+
+  width: 78%;
+
+  pointer-events: none;
+}
+
+
+.hero-intro {
+  margin: 0 0 10px;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 13px;
+
+  letter-spacing: 7px;
+
+  color: #e6d8bd;
+
+  font-weight: 400;
+}
+
+
+.hero-copy h1 {
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(58px, 17vw, 105px);
+
+  line-height: 0.82;
+
+  letter-spacing: -4px;
+
+  font-weight: 500;
+
+  color: #f0d29a;
+}
+
+
+.hero-copy h1 span {
+  display: block;
+}
+
+
+.hero-line {
+  width: 98px;
+  height: 2px;
+
+  margin-top: 24px;
+
+  background: #e2bd72;
+}
+
+
+.hero-tagline {
+  margin: 18px 0 0;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 12px;
+
+  letter-spacing: 4px;
+
+  color: #d9c7a8;
+}
+
+
+/* =====================================================
+   SCROLL INDICATOR
+===================================================== */
+
+.hero-scroll {
+  position: absolute;
+
+  z-index: 12;
+
+  left: 50%;
+  bottom: 5%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: #d8bd87;
+}
+
+
+.scroll-mouse {
+  position: relative;
+
+  width: 27px;
+  height: 45px;
+
+  border: 1px solid #d8bd87;
+
+  border-radius: 18px;
+
+  margin-bottom: 10px;
+}
+
+
+.scroll-mouse span {
+  position: absolute;
+
+  width: 3px;
+  height: 7px;
+
+  background: #d8bd87;
+
+  border-radius: 5px;
+
+  left: 50%;
+  top: 8px;
+
+  transform: translateX(-50%);
+}
+
+
+.hero-scroll p {
+  margin: 1px 0;
+
+  font-size: 9px;
+
+  letter-spacing: 5px;
+
+  font-family: "DM Sans", sans-serif;
+}
+
+
+/* =====================================================
+   REVEAL
+===================================================== */
+
+.hero-copy,
+.hero-person,
+.hero-brand,
+.hero-menu,
+.hero-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+
+  animation: heroReveal 1.2s cubic-bezier(.2,.7,.2,1) forwards;
+}
+
+
+.hero-brand {
+  animation-delay: .15s;
+}
+
+
+.hero-menu {
+  animation-delay: .2s;
+}
+
+
+.hero-person {
+  animation-delay: .35s;
+}
+
+
+.hero-copy {
+  animation-delay: .55s;
+}
+
+
+.hero-scroll {
+  animation-delay: .9s;
+}
+
+
+@keyframes heroReveal {
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =====================================================
+   LARGER PHONES
+===================================================== */
+
+@media (min-width: 430px) {
+
+  .hero-top {
+    padding-left: 34px;
+    padding-right: 34px;
+  }
+
+  .hero-copy {
+    left: 8%;
+    bottom: 21%;
+  }
+
+  .hero-person {
+    width: 100%;
+    right: -17%;
+  }
+
+}
+
+
+/* =====================================================
+   TABLET / DESKTOP
+===================================================== */
+
+@media (min-width: 700px) {
+
+  .hero-top {
+    padding: 40px 55px 0;
+  }
+
+
+  .hero-brand {
+    font-size: 30px;
+  }
+
+
+  .hero-person {
+    width: 75%;
+
+    right: -4%;
+
+    bottom: -5%;
+  }
+
+
+  .hero-copy {
+    left: 9%;
+
+    bottom: 20%;
+
+    width: 55%;
+  }
+
+
+  .hero-copy h1 {
+    font-size: clamp(90px, 10vw, 150px);
+  }
+
+
+  .hero-intro {
+    font-size: 16px;
+    letter-spacing: 9px;
+  }
+
+
+  .hero-tagline {
+    font-size: 14px;
+  }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hero-copy,
+  .hero-person,
+  .hero-brand,
+  .hero-menu,
+  .hero-scroll {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+}
+/* =========================================================
+   FINAL HERO OVERRIDE — MOBILE
+========================================================= */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  background: #080807;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  height: 100svh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 78% 48%,
+      rgba(164, 119, 54, 0.20),
+      transparent 32%
+    ),
+    linear-gradient(
+      180deg,
+      #080807 0%,
+      #0b0a08 55%,
+      #080807 100%
+    );
+}
+
+/* ---------- TOP BRAND ---------- */
+
+.hero-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 105px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 32px;
+  box-sizing: border-box;
+
+  z-index: 20;
+}
+
+.hero-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  color: #e7c783;
+  font-family: "Playfair Display", serif;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.hero-hawk {
+  color: #e7c783;
+  font-size: 25px;
+  line-height: 1;
+}
+
+/* ---------- MENU ---------- */
+
+.hero-menu {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+
+  padding: 0;
+  border: 0;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.hero-menu span {
+  display: block;
+  width: 34px;
+  height: 2px;
+
+  background: #e7c783;
+}
+
+/* ---------- IMAGE ---------- */
+
+.hero-visual {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+  pointer-events: none;
+
+  z-index: 2;
+}
+
+.hero-glow {
+  position: absolute;
+
+  width: 65%;
+  height: 55%;
+
+  right: -10%;
+  top: 32%;
+
+  background: rgba(181, 130, 61, 0.17);
+  filter: blur(80px);
+
+  border-radius: 50%;
+}
+
+.hero-person {
+  position: absolute;
+
+  width: 78%;
+  max-width: none;
+
+  right: -5%;
+  bottom: -2%;
+
+  height: auto;
+
+  object-fit: contain;
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+/* ---------- TEXT ---------- */
+
+.hero-copy {
+  position: absolute;
+
+  left: 8%;
+  bottom: 26%;
+
+  width: 75%;
+
+  z-index: 10;
+
+  pointer-events: none;
+}
+
+.hero-intro {
+  margin: 0 0 16px;
+
+  color: #e4d9c0;
+
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+
+  letter-spacing: 7px;
+}
+
+.hero-copy h1 {
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  color: #e8c783;
+
+  font-family: "Playfair Display", serif;
+  font-size: clamp(62px, 17vw, 100px);
+  font-weight: 500;
+
+  line-height: 0.82;
+  letter-spacing: -3px;
+}
+
+.hero-copy h1 span {
+  display: block;
+}
+
+.hero-line {
+  width: 100px;
+  height: 3px;
+
+  margin-top: 28px;
+
+  background: #e4c47c;
+}
+
+.hero-tagline {
+  margin: 28px 0 0;
+
+  color: #d8cdb6;
+
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+
+  letter-spacing: 5px;
+}
+
+/* ---------- SCROLL ---------- */
+
+.hero-scroll {
+  position: absolute;
+
+  left: 50%;
+  bottom: 7%;
+
+  transform: translateX(-50%);
+
+  z-index: 15;
+
+  text-align: center;
+
+  color: #d9c49a;
+
+  font-family: "DM Sans", sans-serif;
+}
+
+.hero-scroll p {
+  margin: 7px 0 0;
+
+  font-size: 10px;
+  letter-spacing: 5px;
+}
+
+.scroll-mouse {
+  width: 34px;
+  height: 55px;
+
+  margin: 0 auto 12px;
+
+  border: 1.5px solid #e1c47b;
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding-top: 9px;
+  box-sizing: border-box;
+}
+
+.scroll-mouse span {
+  width: 3px;
+  height: 9px;
+
+  background: #e1c47b;
+  border-radius: 5px;
+
+  animation: scrollDot 1.6s ease-in-out infinite;
+}
+
+@keyframes scrollDot {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  60% {
+    transform: translateY(12px);
+    opacity: 0.35;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   MOBILE TUNING
+========================================================= */
+
+@media (max-width: 430px) {
+
+  .hero-top {
+    height: 92px;
+    padding: 0 28px;
+  }
+
+  .hero-brand {
+    font-size: 27px;
+  }
+
+  .hero-menu {
+    width: 42px;
+  }
+
+  .hero-menu span {
+    width: 31px;
+  }
+
+  .hero-person {
+    width: 79%;
+    right: -7%;
+    bottom: -2%;
+  }
+
+  .hero-copy {
+    left: 8%;
+    bottom: 25%;
+    width: 78%;
+  }
+
+  .hero-intro {
+    font-size: 12px;
+    letter-spacing: 6px;
+  }
+
+  .hero-copy h1 {
+    font-size: 18vw;
+    line-height: 0.83;
+    letter-spacing: -3px;
+  }
+
+  .hero-line {
+    width: 88px;
+    height: 2px;
+    margin-top: 25px;
+  }
+
+  .hero-tagline {
+    font-size: 10px;
+    letter-spacing: 4px;
+    margin-top: 24px;
+  }
+
+  .hero-scroll {
+    bottom: 5%;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 360px) {
+
+  .hero-top {
+    padding: 0 22px;
+  }
+
+  .hero-brand {
+    font-size: 24px;
+  }
+
+  .hero-person {
+    width: 84%;
+    right: -10%;
+  }
+
+  .hero-copy {
+    bottom: 27%;
+  }
+
+  .hero-copy h1 {
+    font-size: 17vw;
+  }
+
+  .hero-scroll {
+    bottom: 4%;
+  }
+}
